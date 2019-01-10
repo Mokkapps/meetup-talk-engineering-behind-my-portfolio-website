@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/theme/mokkapps.css" />
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai-sublime.css" />
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? "css/print/pdf.css"
+        : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="footer">
+        <img
+          src="./icon.png"
+          width="40"
+          height="40"
+          style="margin-right: 10px"
+        /><a href="https://mokkapps.de">@Mokkapps</a>
+      </div>
+
+      <div class="slides">
+        <section>
+          <h2>The Engineering Behind My Portfolio Website</h2>
+          <a href="https://www.mokkapps.de">Michael Hoffmann (@Mokkapps)</a>
+        </section>
+
+        <section>
+          <section>
+            <h3>2017: Version 1</h3>
+            <h4>based on <a href="https://wordpress.com/">WordPress</a></h4>
+            <img src="./images/website-v1.png" />
+          </section>
+          <section>
+            <h3>End 2017: Version 2</h3>
+            <h4>
+              based on
+              <a href="https://gohugo.io/">Hugo (static site generator)</a>
+            </h4>
+            <img src="./images/website-v2.png" />
+            <aside class="notes">
+              Developed in pure HTML, CSS & JS
+            </aside>
+          </section>
+          <section>
+            <h2>2018: Version 3</h2>
+            <a href="https://mokkapps.de">https://mokkapps.de</a>
+            <img src="./images/website-v3.png" />
+
+            <aside class="notes">
+              <h2>Motivation for Version 3</h2>
+              <ul>
+                <li>
+                  Show my creativity and make a website that is a true expression of
+                  myself
+                </li>
+                <li>
+                  Design as much as possible myself without using pre-designed
+                  templates
+                </li>
+                <li>Make the site as fast and accessible as possible</li>
+                <li>
+                  Provide a foundation to make the website easily extendable and
+                  adjustable
+                </li>
+                <li>Make the website fully responsive</li>
+                <li>Integrate blog in website</li>
+              </ul>
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <h2>Tech Stack Version 3</h2>
+          <img src="./images/cover.png" />
+        </section>
+
+        <section>
+          <section>
+            <h3><a href="https://www.gatsbyjs.org/">GatsbyJS</a>: Static Site Generator</h3>
+            <img class="stretch" src="./images/gatsbyjs.png" />
+            <aside class="notes">
+                <h2>Why GatsbyJS?</h2>
+                <ul>
+                  <li>
+                    I love using <a href="https://reactjs.org/">React</a> and it has
+                    a rich ecosystem of libraries, components, etc.
+                  </li>
+                  <li>
+                    It uses <a href="https://graphql.org/">GraphQL</a> which I
+                    wanted to gain some more practical experience with
+                  </li>
+                  <li>
+                    Very good
+                    <a href="https://www.gatsbyjs.org/docs/">documentation</a>,
+                    <a href="https://www.gatsbyjs.org/plugins/">plugins</a> &
+                    <a href="https://www.gatsbyjs.org/starters/">starters</a>
+                  </li>
+                  <li>Can be easily combined with several APIs, CMS and more</li>
+                </ul>
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <h2>Responsive Images</h2>
+          <a href="https://www.gatsbyjs.org/packages/gatsby-image/#gatsby-image">"gatsby-image" plugin</a>
+          <img class="stretch" src="./images/blur.gif" alt="Responsive Image Blur Effect">
+        </section>
+
+        <section>
+          <h2><a href="https://www.styled-components.com/">Styled Components</a></h2>
+          
+          <pre><code class="javascript" data-trim>
+              import React from 'react';
+              import PropTypes from 'prop-types';
+              import styled from 'styled-components';
+              
+              const StyledArticle = styled.article`
+                max-width: 600px;
+                margin: 0 auto 30px;
+              
+                background: white;
+                border-radius: 10px;
+                padding: 2rem;
+                min-width: ${props => (props.narrow ? '50%' : '100%')};
+              `;
+              
+              const Article = ({children}) => (<StyledArticle>{children}</StyledArticle>));
+              
+              Article.propTypes = {
+                children: PropTypes.node.isRequired,
+              };
+              
+              export default Article;
+          </code></pre>
+        </section>
+
+        <section>
+          <a href="https://kyleamathews.github.io/typography.js/">Typography.js</a>
+          <img class="stretch" src="./images/typography.png" alt="Typography Image">
+        </section>
+
+        <section>
+          <section>
+            <h2>Blog</h2>
+            <ul>
+              <li>Articles are written in <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a></li>
+              <li>Posts, categories and web pages are automatically created from Markdown files</li>
+            </ul>
+          </section>
+
+          <!-- <section>
+              <pre><code data-trim data-noescape>      
+                root
+                └── src
+                    ├── content
+                    │   ├── posts
+                    │   │   ├── 2018-05-11___my-first-vs-code-extension
+                    │   │   |   ├── jasmine-test-selector.png
+                    │   │   │   └── index.md
+                    │   │   ├── 2018-05-12___my-first-npm-package
+                    │   │   |   ├── github-traffic-cli.png
+                    │   │   │   └── index.md
+                    |   |
+                    |   |   ...
+              </code></pre>
+
+              My Gatsby configuration creates a blog post page for each of the folders, e.g
+              <p>https://www.mokkapps.de/blog/my-first-vs-code-extension/</p>
+          </section> -->
+        </section> 
+
+        <section>
+          <h2>Hosting</h2>
+          <a href="https://www.netlify.com/">Netlify</a>
+          <q>The all-in-one platform for automating modern web projects</q>
+          </br>
+
+          <aside class="notes">
+            <ul>
+              <li>1 user limit</li>
+              <li>Continuous deployment</li>
+              <li>Custom domains & HTTPS</li>
+              <li>Access to per-site addons</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section>
+          <section>
+            <h2>Continuous Integration</h2>
+          </section>
+          <section>
+              <a href="https://travis-ci.org/">Travis CI</a>
+              <p>Deploy & test my website each time I push to my git master branch</p>
+              <p>Configuration example (travis.yml):</p>
+              <pre><code data-trim data-noescape>      
+                  script:
+                    - npm run lint
+                    - npm run test:e2e:ci
+                    - npm run build
+
+                  deploy:
+                    provider: script
+                    script: "curl -X POST -d '' https://api.netlify.com/build_hooks/5ba3c8da1f12b70cbbcaa1a3"
+                    skip_cleanup: true
+                    on:
+                      branch: master
+                </code></pre>
+          </section>
+          <section>
+              <h2>E2E Tests</h2>
+              <a href="https://www.cypress.io/">Cypress.io</a>
+              <iframe class="stretch" data-src="https://www.youtube.com/embed/HgbFzH5-YrQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </section>
+        </section>
+
+        <section>
+            <h2>Google Lighthouse Score</h2>
+            <img class="stretch" src="./images/lighthouse.png">
+        </section>
+
+        <section>
+            <h2>Conclusion</h2>
+            <p>I am proud of the result</p>
+            <p>I use the website to:</p>
+            <ul>
+              <li>Show specific skill to employers</li>
+              <li>Tell people to read my blog</li>
+              <li>Promote my private projects</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Related Blog Post</h2>
+            <blockquote class="twitter-tweet"><p lang="en" dir="ltr">📝 New blog post:<br><br>&quot;The Engineering Behind My Portfolio Website&quot; <a href="https://t.co/L6NYuyyVpl">https://t.co/L6NYuyyVpl</a></p>&mdash; Michael Hoffmann (@Mokkapps) <a href="https://twitter.com/Mokkapps/status/1073077485946974208?ref_src=twsrc%5Etfw">December 13, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+          </section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        dependencies: [
+          { src: "plugin/markdown/marked.js" },
+          { src: "plugin/markdown/markdown.js" },
+          { src: "plugin/notes/notes.js", async: true },
+          {
+            src: "plugin/highlight/highlight.js",
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }
+        ]
+      });
+    </script>
+  </body>
+</html>
