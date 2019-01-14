@@ -56,6 +56,12 @@ section.has-light-background {
 
   display: flex;
   align-items: center;
+
+  h3 {
+    margin: 0;
+    letter-spacing: 0.2em;
+    font-weight: bold;
+  }
 }
 
 // Theme template ------------------------------
